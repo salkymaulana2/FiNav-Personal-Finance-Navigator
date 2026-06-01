@@ -27,12 +27,12 @@ st.markdown("""
         background-color: #1E232A !important;
     }
     
+    /* FIX: Only apply white text strictly INSIDE the sidebar container */
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
     [data-testid="stSidebar"] label, 
     [data-testid="stSidebar"] h3, 
-    [data-testid="stSidebar"] p, 
     [data-testid="stSidebar"] span,
-    [data-testid="stSidebar"] caption,
-    [data-testid="stSidebar"] div {
+    [data-testid="stSidebar"] caption {
         color: #FFFFFF !important;
         opacity: 1.0 !important;
     }
@@ -53,10 +53,51 @@ st.markdown("""
         border-bottom-color: #047857 !important;
     }
     
-    label, .stMarkdown p, stCaption {
+    /* FIX RADIKAL: Semua teks utama berwarna abu-abu gelap KECUALI teks yang berada di dalam tombol (button) */
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] p:not(button p):not(a p),
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] h1,
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] h3,
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] li,
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] table,
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] th,
+    [data-testid="stMain"] [data-testid="stMarkdownContainer"] td,
+    label:not(button label), 
+    stCaption {
         color: #1E293B !important;
     }
     
+    /* FIX STRUCTURAL: Mengatur kedalaman tabel agar bersih dan kontras tinggi */
+    [data-testid="stMain"] table {
+        border-collapse: collapse !important;
+        width: 100% !important;
+        margin: 15px 0 !important;
+    }
+    [data-testid="stMain"] th {
+        background-color: #F1F5F9 !important;
+        color: #0F172A !important;
+        font-weight: 700 !important;
+        padding: 8px !important;
+        border: 1px solid #CBD5E1 !important;
+    }
+    [data-testid="stMain"] td {
+        padding: 8px !important;
+        border: 1px solid #E2E8F0 !important;
+        color: #334155 !important;
+    }
+    
+    /* PERBAIKAN TOTAL TOMBOL DOWNLOAD & UMUM: Memaksa warna teks teks tombol Streamlit menjadi PUTIH murni */
+    button[data-testid="stBaseButton-secondary"],
+    button[data-testid="stBaseButton-secondary"] p,
+    button[data-testid="stBaseButton-secondary"] span,
+    div.stDownloadButton > button,
+    div.stDownloadButton > button p,
+    div.stDownloadButton > button span {
+        color: #FFFFFF !important;
+        text-decoration: none !important;
+    }
+    
+    /* General Action Buttons (Purge Memory) */
     div.stButton > button:not([form]) {
         background-color: #059669 !important;
         border-color: #059669 !important;
@@ -71,6 +112,7 @@ st.markdown("""
         border-color: #047857 !important;
     }
     
+    /* Form Submit Button (Commit Entry) */
     div[data-testid="stForm"] button[data-testid="stBaseButton-secondaryFormSubmit"] {
         background-color: #059669 !important;
         color: #FFFFFF !important;
@@ -90,9 +132,9 @@ st.markdown("""
         color: #FFFFFF !important;
     }
     
+    /* Download CSV Button Background styling */
     div.stDownloadButton > button {
         background-color: #1E293B !important;
-        color: #FFFFFF !important;
         border: 1px solid #1E293B !important;
         font-weight: 600 !important;
         text-transform: uppercase !important;
@@ -104,8 +146,8 @@ st.markdown("""
     div.stDownloadButton > button:hover {
         background-color: #0F172A !important;
         border-color: #0F172A !important;
-        color: #FFFFFF !important;
     }
+    /* Delete Row Button in Lists */
     div.stButton > button[id^="delete_row_"] {
         background-color: #059669 !important;
         color: white !important;
@@ -114,7 +156,7 @@ st.markdown("""
         padding: 0.2rem 0.5rem !important;
     }
     
-    /* Structured Metric Blocks: High-Contrast Emerald */
+    /* Structured Metric Blocks */
     .metric-box { 
         background-color: #047857 !important; 
         padding: 22px; 
@@ -178,7 +220,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Secure API Configuration
-GEMINI_API_KEY = "AQ.Ab8RN6KrTEZK_8rX7TSF7OlxxZ-DyOjFP5yqJHALMbuow6LSvw"
+GEMINI_API_KEY = "AQ.Ab8RN6LyW8l2_r453gojw1rrCxrACtUCASr2so7aKsUVQa1ODw"
 
 if GEMINI_API_KEY == "YOUR_GEMINI_API_KEY_HERE":
     st.error("API Key Missing: Please replace the placeholder string with your key.")
