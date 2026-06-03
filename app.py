@@ -219,11 +219,13 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Secure API Configuration
-GEMINI_API_KEY = "AQ.Ab8RN6LyW8l2_r453gojw1rrCxrACtUCASr2so7aKsUVQa1ODw"
+import os
 
-if GEMINI_API_KEY == "YOUR_GEMINI_API_KEY_HERE":
-    st.error("API Key Missing: Please replace the placeholder string with your key.")
+# Retrieve key safely from Hugging Face Secrets
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+
+if not GEMINI_API_KEY:
+    st.error("API Key is missing! Please set GEMINI_API_KEY in your Space Secrets.")
     st.stop()
 
 genai.configure(api_key=GEMINI_API_KEY)
